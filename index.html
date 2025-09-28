@@ -176,11 +176,7 @@
                         parts (<i><u>adaptive</u></i>), as the user desires (<i><u>controllable</u></i>), using only a
                         few annotated in-the-wild images as references (<i><u>few-shot</u></i>).
                       </h2>
-                      <!-- <p class="has-text-centered" style="padding-top: 0px;">
-                        We segment 3D shapes into possibly non-semantic and non-text describable
-                        parts (<i><u>adaptive</u></i>), as the user desires (<i><u>controllable</u></i>), using only a
-                        few annotated in-the-wild images as references (<i><u>few-shot</u></i>).
-                      </p> -->
+                      <!-- We segment 3D shapes into possibly non-semantic and non-text describable ... -->
                   </div>
                   </div>
 
@@ -192,14 +188,7 @@
                         <img src="./static/assets/teaser_v3.png" alt="icon">
                     </div>
                   </div>
-                  <h2 class=" subtitle has-text-centered" style="padding-top: 0px">
-                    <!-- <p>
-                    Our method \textbf{ASIA} is trained on a few user-annotated \textit{images}, \textit{i.e.}, the "Reference Annotations", 
-                    and produces a part segmentation for a given 3D shape that adheres to the references. Our method generates accurate segmentations 
-                    despite geometric (\textit{e.g.}, the hair) and structural (\textit{e.g.}, the microphones and sofa beds) variations in the 3D shapes. 
-                    The two microphones in the box were treated as a {\em single shape\/}. The rightmost example shows that our method can adapt reference 
-                    annotations of cars and horses to properly segment their "hybrids", namely, 3D ponycycles.
-                    </p> -->
+                  <h2 class=" subtitle has-text-centered has-text-justified" style="padding-top: 0px">
                     <p style="font-size: 90%;">
                       Our method, <b>ASIA</b>, is trained on a few user-annotated <i>images</i>—the “Reference Annotations”—and produces part segmentations for a given 3D shape that adhere to these references.
                       It generates accurate results despite geometric variations (<i>e.g.</i>, hair) and structural differences (<i>e.g.</i>, microphones and sofa beds).
@@ -253,10 +242,7 @@
           <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
               <img src="./static/assets/asia_train.png" style="width: 60%; height: auto; padding-top: 15px"/>
-              <div class="content has-text-centered" style="padding-top: 10px">
-                <!-- \textbf{Training Pipeline.} Given a few in-the-wild images and their segmentations, \textbf{ASIA} learns a set of tokens—one for each \textit{part}—that align SD attention maps to localize the segments.
-                We further finetune the SD UNet through LoRA with our novel \textit{part-aware correspondence} loss to ensure that part features, and hence the predicted segments, remain consistent across views.
-                The \textit{Mask Extractor} computes the segmentation masks using intermediate features from multiple SD attention layers. -->
+              <div class="content has-text-centered has-text-justified" style="padding-top: 10px">
                 <span style="font-size:107.5%; color: black;"><b>Training Pipeline.</b></span> Given a few in-the-wild images and their segmentations, 
                 <strong>ASIA</strong> learns a set of tokens—one for each <em>part</em>—that align SD attention maps to localize the segments. 
                 We also finetune the SD UNet through LoRA with our novel <em>part-aware correspondence</em> loss to ensure that part features, 
@@ -271,15 +257,7 @@
           <div class="columns is-centered has-text-centered">
             <div class="column is-full-width">
               <img src="./static/assets/asia_inference.png" style="padding-top: 25px"/>
-              <div class="content has-text-centered" style="padding-top: 10px">
-                <!-- \textbf{Inference Pipeline.} Given an input 3D mesh, we first render multi-view RGB images and noise them to prepare the input to 
-                our model. We also extract \textit{geometric edges} of the mesh from the same views as the RGB images to be passed as input through a 
-                pre-trained ControlNet. We then pass these, along with our trained set of text embeddings, to our model with the trained LoRA layers.
-                We then extract the segmentation masks from the \textit{Mask Extractor}, back-project the labels to UV-space, and aggregate all 
-                the partial UV-maps to a single \textit{globally consistent atlas}. This can then be wrapped onto the input 3D mesh to get the segmented output.
-                For Noise Optimization, we render the aggregated atlas of labels into the same views as the input RGB images and optimize 
-                $\mathcal{E}_{consis}(\cdot)$ (our objective for \textit{Noise Optimization}) to update the per-view input noise and further 
-                enhance the multi-view consistency. -->
+              <div class="content has-text-centered has-text-justified" style="padding-top: 10px">
                 <span style="font-size:107.5%; color: black;"><b>Inference Pipeline.</b></span> Given a 3D mesh, we first render multi-view RGB images and noise them to prepare the input to 
                 our model. We also extract <em>geometric edges</em> of the mesh, from same views as the RGB images, to provide them as input through a 
                 pre-trained ControlNet. We then pass these, along with the trained text tokens, to our model with trained LoRA layers.
@@ -398,10 +376,6 @@
             </pre> 
         </div>
     </section>
-
-    <!-- volume = {43}, -->
-    <!-- number = {4}, -->
-    <!-- articleno = {40}, -->
 
     <footer class="footer" style="padding:1rem 0;">
         <div class="container">
