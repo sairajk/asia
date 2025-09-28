@@ -31,7 +31,9 @@
 
 We introduce ASIA (Adaptive 3D Segmentation using few Image Annotations), a novel framework that enables segmentation of possibly non-semantic and non-text-describable “parts” in 3D. Our segmentation is controllable through a few user-annotated in-the-wild images, which are easier to collect than multi-view images, less demanding to annotate than 3D models, and more precise than potentially ambiguous text descriptions. Our method leverages the rich priors of text-to-image diffusion models, such as Stable Diffusion (SD), to transfer segmentations from image space to 3D, even when the annotated and target objects differ significantly in geometry or structure. During training, we optimize a text token for each segment and fine-tune our model with a novel cross-view part correspondence loss. At inference, we segment multi-view renderings of the 3D mesh, fuse the labels in UV-space via voting, refine them with our novel Noise Optimization technique, and finally map the UV-labels back onto the mesh. ASIA provides a practical and generalizable solution for both semantic and non-semantic 3D segmentation tasks, outperforming existing methods by a noticeable margin in both quantitative and qualitative evaluations.
 
+<br>
 <h3 align="center">🚧 Code will be released soon. 🚧</h3>
+<br>
 
 ## Citation
 
