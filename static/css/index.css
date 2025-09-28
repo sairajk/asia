@@ -320,3 +320,38 @@ body {
 .image-carousel .ic-nav:active {
   transform: translateY(-50%) scale(0.98); /* keep vertical centering */
 }
+
+
+/* Reset UA button styles and force a perfect circle */
+.image-carousel .ic-dots .ic-dot {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  display: inline-block;
+  padding: 0;                 /* kill default button padding */
+  margin: 0;
+  border: 0;                  /* you already had border: none; */
+  box-sizing: border-box;
+
+  width: 8px;                /* use even pixels to avoid subpixel rounding */
+  height: 8px;
+  /* Or: aspect-ratio: 1 / 1; (keep width only) */
+  border-radius: 50%;
+  background: rgb(235, 158, 116);  /* your inactive color */
+  line-height: 0;             /* prevent inline formatting height quirks */
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.image-carousel .ic-dots .ic-dot.is-active {
+  background: rgb(216, 34, 30);    /* your active color */
+}
+
+/* Optional: if you prefer using aspect-ratio instead of hard height */
+@supports (aspect-ratio: 1) {
+  .image-carousel .ic-dots .ic-dot {
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+}
