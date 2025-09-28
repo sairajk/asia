@@ -171,10 +171,12 @@
                   
                   <div class="columns is-centered">
                   <div class="column is-full-width">
-                      <h2 class="subtitle has-text-centered" style="padding-top: 0px; font-size: 130%;">
-                        <span style="font-size: 105%; color: black;"><b>TL;DR.</b></span> &nbsp; We segment 3D shapes into possibly non-text describable
-                        parts (<i><u>adaptive</u></i>), as the user desires (<i><u>controllable</u></i>), using only a
-                        few annotated in-the-wild images as references (<i><u>few-shot</u></i>).
+                      <h2 id="tldr" class="subtitle has-text-centered" style="padding-top: 0px; font-size: 130%;">
+                        <!-- Text highlighted at the end -->
+                        <span style="font-size: 105%; color: black;"><b><u>TL;DR.</u></b></span>&nbsp;
+                        We segment 3D shapes into possibly non-text describable
+                        parts (<i>adaptive</i>), as the user desires (<i>controllable</i>), using only a
+                        few annotated in-the-wild images as references (<i>few-shot</i>).
                       </h2>
                       <!-- We segment 3D shapes into possibly non-semantic and non-text describable ... -->
                   </div>
@@ -404,6 +406,68 @@
             </div>
         </div>
     </footer>
+  
+  <script>
+  /**
+  * Wrap matching words/phrases in <mark class="tldr-mark">…</mark>
+  * root: selector or element containing the TLDR text
+  * terms: array of strings or RegExps
+  */
+  function markerHighlight(root, terms, { wholeWord = true, caseInsensitive = true } = {}) {
+    const el = typeof root === 'string' ? document.querySelector(root) : root;
+    if (!el || !terms?.length) return;
+
+    const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const sources = terms.map(t =>
+      t instanceof RegExp ? t.source : (wholeWord ? `\\b${esc(t)}\\b` : esc(t))
+    );
+    const flags = (caseInsensitive ? 'i' : '') + 'g';
+    const re = new RegExp(sources.join('|'), flags);
+
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+      acceptNode(n) {
+        if (!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        let p = n.parentNode;
+        while (p) {
+          if (p.nodeType === 1 && (p.matches('mark.tldr-mark') ||
+              /^(CODE|PRE|SCRIPT|STYLE)$/i.test(p.tagName))) return NodeFilter.FILTER_REJECT;
+          p = p.parentNode;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    nodes.forEach(node => {
+      const text = node.nodeValue;
+      re.lastIndex = 0;
+      let m, last = 0, hit = false;
+      const frag = document.createDocumentFragment();
+
+      while ((m = re.exec(text))) {
+        hit = true;
+        if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+        const mark = document.createElement('mark');
+        mark.className = 'tldr-mark';
+        mark.textContent = m[0];
+        frag.appendChild(mark);
+        last = m.index + m[0].length;
+      }
+      if (!hit) return;
+      if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+
+  markerHighlight('#tldr', [
+    /* /TL;DR\.?/i, */
+    'adaptive',
+    'controllable',
+    'few-shot'
+  ]);
+  </script>
 
 </body>
 

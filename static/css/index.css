@@ -277,3 +277,17 @@ h4, h5, h6 { font-weight: 500; }
     aspect-ratio: 1 / 1;
   }
 }
+
+/* Highlight text */
+/* Gradient marker behind text (clean edges, wraps nicely) */
+.tldr-mark {
+  background: linear-gradient(120deg,
+              rgba(216, 34, 30, 0.35),
+              rgba(235, 158, 116, 0.35));
+  /* ↑ adjust 0.28 for stronger/weaker highlight */
+  border-radius: .40em;
+  padding: 0 .20em;
+  color: inherit;                /* keep your text color */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;   /* rounded corners on wrapped lines */
+}
