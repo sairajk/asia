@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="ASIA: Adaptive 3D Segmentation using Few Image Annotations">
+    <meta name="keywords" content="ASIA, asia, segmentation, few images, diffusion, 3D contents, generation, 3D shape segmentation, stable diffusion, controlnet, adaptive segmentation, custom segmentation, mesh segmentation">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ASIA: Adaptive 3D Segmentation using Few Image Annotations</title>
+
+    <!-- Google tag (gtag.js) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SVQBE9MCP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5SVQBE9MCP');
+    </script> -->
+
+    <!-- Performance hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mynerve&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+
+    <!-- <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"> -->
+    <!-- Font Awesome 6.7.2 (stable LTS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous">
+
+    <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+
+    <link rel="icon" href="./static/assets/chinese_lantern_1.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script defer src="./static/js/fontawesome.all.min.js"></script> -->
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+
+    <!-- For Latex -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+
+<body>
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <div class="text-color-gradient title is-1 publication-title-sketch" 
+                            style="font-size:400%; line-height:1; margin-bottom: 0px; padding-bottom: 0px;"> 
+                            <span class="dnerf">ASIA</span>
+                            <img src="./static/assets/3d-dragon-cute-red-cartoon-dragon.png" alt="icon" style="height:1.05em; width:auto; margin-bottom: -12.5px;">
+                        </div>
+                        <!-- Adaptive 3D Segmentation using Few Image Annotations -->
+                        <h1 class="title is-2 publication-title" style="margin-top: 0px; padding-top: 0px;">
+                            <span style="white-space:nowrap;"><span class="text-color-gradient publication-title-sketch" style="font-size:125%;">A</span>daptive</span> 3D 
+                            <span style="white-space:nowrap;"><span class="text-color-gradient publication-title-sketch" style="font-size:125%;">S</span>egmentation</span> using Few 
+                            <span style="white-space:nowrap;"><span class="text-color-gradient publication-title-sketch" style="font-size:125%;">I</span>mage</span>
+                            <span style="white-space:nowrap;"><span class="text-color-gradient publication-title-sketch" style="font-size:125%;">A</span>nnotations</span>
+                        </h1>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a href="https://sairajk.github.io/" target="_blank">Sai Raj Kishore Perla</a>,&nbsp</span>
+                            <span class="author-block">
+                                <a href="https://aditya-vora.github.io/" target="_blank">Aditya Vora</a>,&nbsp</span>
+                            <span class="author-block">
+                                <a href="https://sauradip.github.io/" target="_blank">Sauradip Nag</a>,&nbsp</span>
+                            <span class="author-block">
+                                <a href="https://www.sfu.ca/~amahdavi/" target="_blank">Ali Mahdavi-Amiri</a>,&nbsp</span>
+                            <span class="author-block">
+                                <a href="https://www.cs.sfu.ca/~haoz/" target="_blank">Hao (Richard) Zhang</a>
+                            </span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">Simon Fraser University</span>
+                        </div>
+
+                        <!-- <br> -->
+                        <div style="height: 0.5em;"></div>  <!-- Half line-break -->
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="title is-4">SIGGRAPH <span class="text-color-gradient publication-title-sketch" style="font-size:150%;">Asia</span>, 2025</span>
+                            &nbsp;
+                            <img src="./static/assets/hk_text_1.png" alt="icon" style="height:2.75em; width:auto; margin-bottom: -15px;">
+                        </div>
+
+                        <div style="height: 0.5em;"></div>  <!-- Half line-break -->
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- PDF Link. -->
+                                <span class="link-block">
+                                    <a href="." target="_blank"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fa-solid fa-file-pdf"></i>
+                                        </span>
+                                        <span>Paper</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a class="external-link button is-normal is-rounded is-dark" href="." target="_blank">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span>
+
+                                <!-- Video Link. -->
+                                <!-- <span class="link-block">
+                                    <a href="" target="_blank"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-youtube"></i>
+                                        </span>
+                                        <span>Video</span>
+                                    </a>
+                                </span> -->
+
+                                <!-- Github Link. -->
+                                <span class="link-block">
+                                    <a href="." class="external-link button is-normal is-rounded is-dark" target="_blank">
+                                        <span class="icon">
+                                            <i class="fa-brands fa-github"></i>
+                                        </span>
+                                        <span>Code (Coming Soon!)</span>
+                                    </a>
+                                </span>
+
+                                <!-- Poster Link -->
+                                <span class="link-block">
+                                    <a href="." target="_blank"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fa-solid fa-person-chalkboard"></i>
+                                        </span>
+                                        <span>Poster (Coming Soon!)</span>
+                                    </a>
+                                </span>
+
+                                <!-- Dataset Link. -->
+                                <span class="link-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero teaser">
+        <div class="container is-max-desktop">
+            <div class="hero-body">
+                  
+                  <div class="columns is-centered">
+                  <div class="column is-four-fifths">
+                      <h2 class="subtitle has-text-centered" style="padding-top: 0px; font-size: 130%;">
+                        <span style="font-size: 105%; color: black;"><b>TL;DR.</b></span> &nbsp; We introduce <b>ASIA</b>, a <i>controllable few-shot</i> 
+                        approach for <i>Adaptive&nbsp;3D&nbsp;Segmentation</i>—the first of its kind.
+                      </h2>
+                      <p class="has-text-centered" style="padding-top: 0px;">
+                        We segment 3D shapes into possibly non-semantic and non-text describable
+                        parts (<i><u>adaptive</u></i>), as the user desires (<i><u>controllabe</u></i>), using only a
+                        few annotated in-the-wild images as references (<i><u>few-shot</u></i>).
+                        <!-- Semantic or text-describable segmentation can be seen as a special case of
+                        adaptive segmentation. -->
+                      </p>
+                  </div>
+                  </div>
+
+                  <br>
+                
+                  <div class="columns is-centered has-text-centered">
+                    <!-- <div class="column is-four-fifths"> -->
+                    <div class="column is-full-width">
+                        <img src="./static/assets/teaser_v3.png" alt="icon">
+                    </div>
+                  </div>
+                  <h2 class=" subtitle has-text-centered" style="padding-top: 0px">
+                    <!-- <p>
+                    Our method \textbf{ASIA} is trained on a few user-annotated \textit{images}, \textit{i.e.}, the "Reference Annotations", 
+                    and produces a part segmentation for a given 3D shape that adheres to the references. Our method generates accurate segmentations 
+                    despite geometric (\textit{e.g.}, the hair) and structural (\textit{e.g.}, the microphones and sofa beds) variations in the 3D shapes. 
+                    The two microphones in the box were treated as a {\em single shape\/}. The rightmost example shows that our method can adapt reference 
+                    annotations of cars and horses to properly segment their "hybrids", namely, 3D ponycycles.
+                    </p> -->
+                    <p style="font-size: 90%;">
+                      Our method, <b>ASIA</b>, is trained on a few user-annotated <i>images</i>—the “Reference Annotations”—and produces part segmentations for a given 3D shape that adhere to these references.
+                      It generates accurate results despite geometric variations (<i>e.g.</i>, hair) and structural differences (<i>e.g.</i>, microphones and sofa beds).
+                      <b>ASIA</b> can also segment multiple objects at once (<i>e.g.</i>, the two microphones in the box were treated as a <i>single shape</i>), even when trained only on single instances.
+                      The rightmost example shows how our method can adapt annotations from different object categories, cars and horses in this case, to segment their "hybrids", namely, 3D ponycycles.
+                    </p>
+                  </h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top:1rem;">
+        <div class="container is-max-desktop">
+          <!-- Abstract. -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">
+                <img src="./static/assets/chinese_flower_2.png" alt="icon" style="height:1.65em; width:auto; margin-bottom: -15px;">
+                <span class="text-color-gradient publication-title-sketch" style="font-size:140%;">Abstract</span>
+              </h2>
+              <div class="content has-text-justified">
+                <p>
+                    We introduce <b>ASIA</b> (<i><u>A</u>daptive 3D <u>S</u>egmentation using few <u>I</u>mage <u>A</u>nnotations</i>), a novel framework that enables segmentation of possibly non-semantic and non-text-describable “parts” in 3D.
+                    Our segmentation is controllable through a few user-annotated in-the-wild images, which are easier to collect than multi-view images, less demanding to annotate than 3D models, and more precise than potentially ambiguous text descriptions.
+                    Our method leverages the rich priors of text-to-image diffusion models, such as Stable Diffusion (SD), to transfer segmentations from image space to 3D, even when the annotated and target objects differ significantly in geometry or structure.
+                    During training, we optimize a text token for each segment and fine-tune our model with a novel cross-view part correspondence loss.
+                    At inference, we segment multi-view renderings of the 3D mesh, fuse the labels in UV-space via voting, refine them with our novel <i>Noise Optimization</i> technique, and finally map the UV-labels back onto the mesh.
+                    <b>ASIA</b> provides a practical and generalizable solution for both semantic and non-semantic 3D segmentation tasks, outperforming existing methods by a noticeable margin in both quantitative and qualitative evaluations.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!--/ Abstract. -->
+        </div>
+    </section>
+
+    <section class="section" style="padding-top:1rem;">
+        <div class="container is-max-desktop">
+          <!-- Our Approch. -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-three-fifths">
+              <h2 class="title is-3">
+                <img src="./static/assets/chinese_knot_1.png" alt="icon" style="height:1.5em; width:auto; margin-bottom: -13px;">
+                <span class="text-color-gradient publication-title-sketch" style="font-size:140%;">Our Approach</span>
+              </h2>
+            </div>
+          </div>
+          <!--/ Our Approch. -->
+
+          <!-- Train Pipeline -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <img src="./static/assets/asia_train.png" style="width: 60%; height: auto; padding-top: 15px"/>
+              <div class="content has-text-centered" style="padding-top: 10px">
+                <!-- \textbf{Training Pipeline.} Given a few in-the-wild images and their segmentations, \textbf{ASIA} learns a set of tokens—one for each \textit{part}—that align SD attention maps to localize the segments.
+                We further finetune the SD UNet through LoRA with our novel \textit{part-aware correspondence} loss to ensure that part features, and hence the predicted segments, remain consistent across views.
+                The \textit{Mask Extractor} computes the segmentation masks using intermediate features from multiple SD attention layers. -->
+                <span style="font-size:107.5%; color: black;"><b>Training Pipeline.</b></span> Given a few in-the-wild images and their segmentations, 
+                <strong>ASIA</strong> learns a set of tokens—one for each <em>part</em>—that align SD attention maps to localize the segments. 
+                We also finetune the SD UNet through LoRA with our novel <em>part-aware correspondence</em> loss to ensure that part features, 
+                and hence the predicted segments, remain consistent across views. 
+                The <em>Mask Extractor</em> computes the segmentation masks using intermediate features from multiple SD attention layers.
+              </div>
+            </div>
+          </div>
+          <!--/ Train Pipeline -->
+
+          <!-- Inference Pipeline -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+              <img src="./static/assets/asia_inference.png" style="padding-top: 25px"/>
+              <div class="content has-text-centered" style="padding-top: 10px">
+                <!-- \textbf{Inference Pipeline.} Given an input 3D mesh, we first render multi-view RGB images and noise them to prepare the input to 
+                our model. We also extract \textit{geometric edges} of the mesh from the same views as the RGB images to be passed as input through a 
+                pre-trained ControlNet. We then pass these, along with our trained set of text embeddings, to our model with the trained LoRA layers.
+                We then extract the segmentation masks from the \textit{Mask Extractor}, back-project the labels to UV-space, and aggregate all 
+                the partial UV-maps to a single \textit{globally consistent atlas}. This can then be wrapped onto the input 3D mesh to get the segmented output.
+                For Noise Optimization, we render the aggregated atlas of labels into the same views as the input RGB images and optimize 
+                $\mathcal{E}_{consis}(\cdot)$ (our objective for \textit{Noise Optimization}) to update the per-view input noise and further 
+                enhance the multi-view consistency. -->
+                <span style="font-size:107.5%; color: black;"><b>Inference Pipeline.</b></span> Given a 3D mesh, we first render multi-view RGB images and noise them to prepare the input to 
+                our model. We also extract <em>geometric edges</em> of the mesh, from same views as the RGB images, to provide them as input through a 
+                pre-trained ControlNet. We then pass these, along with the trained text tokens, to our model with trained LoRA layers.
+                We then extract the segmentations from <em>Mask Extractor</em>, project the labels to UV-space, and aggregate all 
+                the partially labelled UV-maps to a single, complete, <em>globally consistent atlas</em> through voting. This can then be 
+                wrapped onto the input mesh to get the segmented output.
+                For Noise Optimization, we render the aggregated atlas of labels into the same views as the input RGB images (<i>pseudo-GTs</i>) and optimize 
+                $\mathcal{E}_{consis}(\cdot)$ (our objective for <em>Noise Optimization</em>) to update the per-view input noise and further 
+                enhance multi-view consistency.
+              </div>
+            </div>
+          </div>
+          <!--/ Inference Pipeline -->
+        </div>
+    </section>
+
+    <section class="section" style="padding-top:1rem;">
+        <div class="container is-max-desktop">
+          <!-- Results. -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-three-fifths">
+              <h2 class="title is-3">
+                <img src="./static/assets/chinese_lantern_1.png" alt="icon" style="height:1.75em; width:auto; margin-bottom: -15px;">
+                <span class="text-color-gradient publication-title-sketch" style="font-size:140%;">Results</span>
+              </h2>
+            </div>
+          </div>
+          <!--/ Results. -->
+
+          <!-- Results (Custom Image Carousel; JS code of carousal at the end) -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <div class="image-carousel" id="resultsCarousel" aria-roledescription="carousel">
+                Qualitative results of our approach for <i>adaptive 3D segmentation</i>, with a reference annotation on the left and generated results on the right.
+                <button class="ic-nav ic-prev" aria-label="Previous slide" type="button">
+                  <!-- ❮ -->
+                  <span class="text-color-gradient publication-title-sketch" style="font-size:300%; margin-top: -5px;">&lt;&nbsp;</span>
+                </button>
+
+                <div class="ic-viewport">
+                  <div class="ic-track">
+                    <figure class="ic-slide is-active">
+                      <img src="./static/assets/asia_qual_1.png" alt="Result 1" loading="lazy">
+                    </figure>
+                    <figure class="ic-slide">
+                      <img src="./static/assets/asia_qual_2.png" alt="Result 2" loading="lazy">
+                    </figure>
+                    <figure class="ic-slide">
+                      <img src="./static/assets/asia_qual_3.png" alt="Result 3" loading="lazy">
+                    </figure>
+                    <figure class="ic-slide">
+                      <img src="./static/assets/asia_qual_4.png" alt="Result 3" loading="lazy">
+                    </figure>
+                    <figure class="ic-slide">
+                      <img src="./static/assets/asia_qual_5.png" alt="Result 3" loading="lazy">
+                    </figure>
+                    <figure class="ic-slide">
+                      <img src="./static/assets/asia_qual_6.png" alt="Result 3" loading="lazy">
+                    </figure>
+                    <figure class="ic-slide">
+                      <img src="./static/assets/asia_qual_7.png" alt="Result 3" loading="lazy">
+                    </figure>
+                    <figure class="ic-slide">
+                      <img src="./static/assets/asia_qual_8.png" alt="Result 3" loading="lazy">
+                    </figure>
+                    <figure class="ic-slide">
+                      <img src="./static/assets/asia_qual_9.png" alt="Result 3" loading="lazy">
+                    </figure>
+                  </div>
+                </div>
+
+                <button class="ic-nav ic-next" aria-label="Next slide" type="button">
+                  <!-- ❯ -->
+                  <span class="text-color-gradient publication-title-sketch" style="font-size:300%; margin-top: -6px;">&gt;</span>
+                </button>
+                <div class="ic-dots" role="tablist" aria-label="Slides"></div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+
+          <!-- Description. -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <!-- <h2 class="title is-3">Video</h2> -->
+              <!-- <div class="content has-text-justified"> -->
+                <p style="font-size: 110%;">
+                    Check out the paper to learn more. &#x1F642
+                </p>
+              <!-- </div> -->
+            </div>
+          </div>
+          <!--/ Description. -->
+        </div>
+    </section>
+
+    <section class="section" style="padding-top:1rem;" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title  is-3">
+                <img src="./static/assets/chinese-new-year-floral-decorative-fan-with-golden-patterns.png" alt="icon" style="height:1.25em; width:auto; margin-bottom: -9px;">
+                <span class="text-color-gradient publication-title-sketch" style="font-size:140%;">BibTeX</span>
+            </h2>
+            <pre>
+<code style="display: block; white-space: pre-wrap; margin-block-start: -20px; margin-block-end: -35px;">
+@article{perla2025asia,
+    title={{ASIA}: Adaptive 3D Segmentation using Few Image Annotations},
+    author = {Perla, Sai Raj Kishore and Vora, Aditya and Nag, Sauradip, Mahdavi-Amiri, Ali and Zhang, Hao},
+    journal = {SIGGRAPH Asia Conference Papers},
+    publisher = {ACM New York, NY, USA},
+    year = {2025},
+    doi = {10.1145/3757377.3763821},
+    url = {https://github.com/sairajk/asia},
+}
+</code>
+            </pre> 
+        </div>
+    </section>
+
+    <!-- volume = {43}, -->
+    <!-- number = {4}, -->
+    <!-- articleno = {40}, -->
+
+    <footer class="footer" style="padding:1rem 0;">
+        <div class="container">
+            <div class="content has-text-centered">
+
+                <a class="icon-link" href="." target="_blank">
+                    <i class="fas fa-file-pdf"></i>
+                </a>&nbsp;
+                <a class="icon-link" href="." target="_blank">
+                    <i class="ai ai-arxiv"></i>
+                </a>&nbsp;
+                <a class="icon-link" href="." target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>&nbsp;
+                <a class="icon-link" href="." target="_blank">
+                    <i class="fa-solid fa-person-chalkboard"></i>
+                </a>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content">
+                        <p style="text-align:center">
+                            This webpage template is adapted from <a href="https://nerfies.github.io/" target="_blank">Nerfies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

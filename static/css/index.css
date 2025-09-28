@@ -1,0 +1,304 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title-sketch {
+    /* font-family: "Gloria Hallelujah", cursive;
+    font-weight: 400;
+    font-style: normal; */
+    font-family: "Mynerve", cursive;
+    font-weight: 900;
+    font-style: normal;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-video-column {
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+.publication-links {  /* Add spacing between the buttons */
+  display: flex;
+  flex-wrap: wrap; /* keeps nice wrapping on small screens */
+  gap: 0.5rem;     /* matches Bulma’s default spacing = 8px */
+  justify-content: center; /* center horizontally */
+}
+
+/* For Color Gradient BG for text */
+.text-color-gradient {
+  display: inline-block;
+  background: linear-gradient(120deg, rgb(216, 34, 30), rgb(235, 158, 116));
+  /* background: linear-gradient(120deg, #eecda3 0%, #ef629f 100%); */
+  /* background: linear-gradient(120deg, #108dc7 0%, #ef8e38 100%); */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+
+
+
+
+/* ===== Custom Carousel (dependency-free) ===== */
+.image-carousel { 
+  position: relative; 
+  overflow: visible;              /* allow arrows to sit slightly outside */
+}
+
+/* Viewport: white window, clips neighbors, nice default ratio */
+.image-carousel .ic-viewport {
+  overflow: hidden;
+  border-radius: 10px;
+  background: #fff;
+  aspect-ratio: 16 / 9;           /* adjust if you want a different frame */
+}
+
+/* Fallback for browsers without aspect-ratio support */
+@supports not (aspect-ratio: 1) {
+  .image-carousel .ic-viewport { position: relative; height: 0; padding-bottom: 56.25%; }
+  .image-carousel .ic-track    { position: absolute; inset: 0; height: 100%; }
+  .image-carousel .ic-slide    { position: relative; height: 100%; }
+}
+
+/* Track & slides: one-up, no peeking */
+.image-carousel .ic-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;            /* keep vertical page scroll on mobile */
+}
+.image-carousel .ic-slide {
+  min-width: 100%;
+  margin: 0;
+  background: #fff;               /* white behind letterboxed images */
+}
+.image-carousel .ic-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;            /* fit by width/height, no crop, no distortion */
+  object-position: center;
+}
+
+/* Fallback: ensure the image fills each slide box correctly */
+@supports not (aspect-ratio: 1) {
+  .image-carousel .ic-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+}
+
+/* Arrows (outside on desktop) */
+.image-carousel .ic-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;   /* Button size */
+  border: none; border-radius: 50%;
+  background: rgba(0,0,0,.5);
+  color: #fff; cursor: pointer;
+  display: grid; place-items: center;
+  z-index: 2;
+}
+.image-carousel .ic-prev { left:  -56px; }
+.image-carousel .ic-next { right: -56px; }
+
+/* Keep arrows inside on small screens */
+@media (max-width: 768px) {
+  .image-carousel .ic-prev { left: 8px;  }
+  .image-carousel .ic-next { right: 8px; }
+}
+
+/* Dots below the image */
+.image-carousel .ic-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.image-carousel .ic-dots .ic-dot {
+  width: 8px; height: 8px;
+  border: none; border-radius: 50%;
+  background: rgba(0,0,0,.25);
+  cursor: pointer;
+}
+.image-carousel .ic-dots .ic-dot.is-active {
+  background: rgba(0,0,0,.7);
+}
+
+/* Dot colors */
+.image-carousel .ic-dots .ic-dot {
+  background: rgb(241, 181, 148);         /* inactive */
+}
+
+.image-carousel .ic-dots .ic-dot.is-active {
+  background: rgb(226, 16, 13);           /* active */
+}
+
+/* (optional) better keyboard focus */
+.image-carousel .ic-dots .ic-dot:focus-visible {
+  outline: 2px solid rgb(216, 34, 30);
+  outline-offset: 2px;
+}
+
+/* White circular arrow buttons */
+.image-carousel .ic-nav {
+  background: #fff !important;   /* override the dark bg */
+  color: #000;                    /* color of ❮ / ❯ */
+  border: 1px solid rgba(0,0,0,.15);
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+
+.image-carousel .ic-nav:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,.18);
+}
+
+.image-carousel .ic-nav:active {
+  transform: translateY(-50%) scale(0.98); /* keep vertical centering */
+}
