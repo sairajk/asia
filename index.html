@@ -184,22 +184,53 @@
                   </div>
 
                   <br>
-                
+
                   <div class="columns is-centered has-text-centered">
-                    <!-- <div class="column is-four-fifths"> -->
-                    <div class="column is-full-width">
-                        <img src="./static/assets/teaser_v3.png" alt="icon">
+                    <div class="column is-four-fifths">
+                    <!-- <div class="column is-full-width"> -->
+                        <video poster="" id="teaser" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/assets/asia_video.mp4"
+                                    type="video/mp4">
+                        </video>
                     </div>
                   </div>
-                  <h2 class=" subtitle has-text-centered has-text-justified" style="padding-top: 0px">
-                    <p style="font-size: 90%;">
-                      Our method, <b>ASIA</b>, is trained on a few user-annotated <i>images</i>—the “Reference Annotations”—and produces part segmentations for a given 3D shape that adhere to these references.
-                      It generates accurate results despite geometric variations (<i>e.g.</i>, hair) and structural differences (<i>e.g.</i>, microphones and sofa beds).
-                      <b>ASIA</b> can also segment multiple objects at once (<i>e.g.</i>, the two microphones in the box were treated as a <i>single shape</i>), even when trained only on single instances.
-                      The rightmost example shows how our method can adapt annotations from different object categories, cars and horses in this case, to segment their "hybrids", namely, 3D ponycycles.
-                    </p>
-                  </h2>
+
+                  <!-- <br> -->
+                  <!-- <div style="height: 0.1em;"></div> -->
             </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top:1rem;">
+        <div class="container is-max-desktop">
+
+          <!-- Teaser. -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-three-fifths">
+              <h2 class="title is-3">
+                <img src="./static/assets/red_crackers.png" alt="icon" style="height:1.6em; width:auto; margin-bottom: -10px;">
+                <span class="text-color-gradient publication-title-sketch" style="font-size:140%;">Teaser</span>
+              </h2>
+            </div>
+          </div>
+          <!--/ Teaser. -->
+
+          <!-- Caption. -->
+          <div class="columns is-centered has-text-centered">
+            <!-- <div class="column is-four-fifths"> -->
+            <div class="column is-full-width">
+                <img src="./static/assets/teaser_v3.png" alt="icon">
+            </div>
+          </div>
+          <h2 class=" subtitle has-text-centered has-text-justified" style="padding-top: 0px">
+            <p style="font-size: 90%;">
+              Our method, <b>ASIA</b>, is trained on a few user-annotated <i>images</i>—the “Reference Annotations”—and produces part segmentations for a given 3D shape that adhere to these references.
+              It generates accurate results despite geometric variations (<i>e.g.</i>, hair) and structural differences (<i>e.g.</i>, microphones and sofa beds).
+              <b>ASIA</b> can also segment multiple objects at once (<i>e.g.</i>, the two microphones in the box were treated as a <i>single shape</i>), even when trained only on single instances.
+              The rightmost example shows how our method can adapt annotations from different object categories, cars and horses in this case, to segment their "hybrids", namely, 3D ponycycles.
+            </p>
+          </h2>
+          <!--/ Caption. -->
         </div>
     </section>
 
